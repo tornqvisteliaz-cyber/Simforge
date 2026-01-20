@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Deep aviation navy background */
+    --background: 220 30% 8%;
+    --foreground: 210 20% 95%;
+
+    /* Cards with subtle elevation */
+    --card: 220 25% 12%;
+    --card-foreground: 210 20% 95%;
+
+    --popover: 220 25% 12%;
+    --popover-foreground: 210 20% 95%;
+
+    /* Cockpit amber/gold primary */
+    --primary: 38 90% 55%;
+    --primary-foreground: 220 30% 8%;
+
+    /* Aviation blue secondary */
+    --secondary: 210 80% 50%;
+    --secondary-foreground: 210 20% 95%;
+
+    /* Muted instrument panel gray */
+    --muted: 220 20% 18%;
+    --muted-foreground: 215 15% 60%;
+
+    /* Accent - cyan instrument glow */
+    --accent: 190 80% 50%;
+    --accent-foreground: 220 30% 8%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 210 20% 95%;
+
+    --border: 220 20% 20%;
+    --input: 220 20% 20%;
+    --ring: 38 90% 55%;
+
+    --radius: 0.5rem;
+
+    /* Custom gradients */
+    --gradient-hero: linear-gradient(180deg, hsl(220 30% 8%) 0%, hsl(220 25% 12%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(220 25% 14%) 0%, hsl(220 25% 10%) 100%);
+    --gradient-glow: radial-gradient(ellipse at center, hsl(38 90% 55% / 0.15) 0%, transparent 70%);
+    --gradient-section: linear-gradient(180deg, hsl(220 25% 10%) 0%, hsl(220 30% 8%) 100%);
+
+    /* Shadows */
+    --shadow-glow: 0 0 40px hsl(38 90% 55% / 0.2);
+    --shadow-card: 0 4px 20px hsl(0 0% 0% / 0.3);
+    --shadow-elevated: 0 8px 40px hsl(0 0% 0% / 0.4);
+
+    /* Sidebar (keeping for compatibility) */
+    --sidebar-background: 220 25% 10%;
+    --sidebar-foreground: 210 20% 95%;
+    --sidebar-primary: 38 90% 55%;
+    --sidebar-primary-foreground: 220 30% 8%;
+    --sidebar-accent: 220 20% 18%;
+    --sidebar-accent-foreground: 210 20% 95%;
+    --sidebar-border: 220 20% 20%;
+    --sidebar-ring: 38 90% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Rajdhani', sans-serif;
+    @apply font-semibold tracking-wide;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Navigation styles */
+  .nav-link {
+    @apply relative text-muted-foreground hover:text-foreground transition-colors duration-300;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary scale-x-0 transition-transform duration-300 origin-left;
+  }
+
+  .nav-link:hover::after {
+    @apply scale-x-100;
+  }
+
+  .nav-link.active {
+    @apply text-primary;
+  }
+
+  .nav-link.active::after {
+    @apply scale-x-100;
+  }
+
+  /* Section styles */
+  .section-container {
+    @apply min-h-screen flex flex-col justify-center py-20 px-6 lg:px-20;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl lg:text-6xl text-foreground mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-lg md:text-xl text-muted-foreground max-w-2xl;
+  }
+
+  /* Card styles */
+  .feature-card {
+    @apply p-6 rounded-xl bg-card border border-border transition-all duration-300;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .feature-card:hover {
+    @apply border-primary/50;
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-4px);
+  }
+
+  /* Button variants */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground font-semibold px-6 py-3 rounded-lg transition-all duration-300;
+  }
+
+  .btn-primary:hover {
+    @apply bg-primary/90;
+    box-shadow: var(--shadow-glow);
+  }
+
+  .btn-secondary {
+    @apply bg-secondary/20 text-secondary border border-secondary/50 font-semibold px-6 py-3 rounded-lg transition-all duration-300;
+  }
+
+  .btn-secondary:hover {
+    @apply bg-secondary/30 border-secondary;
+  }
+
+  /* Glow effects */
+  .glow-amber {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 20px hsl(38 90% 55% / 0.5);
+  }
+
+  /* Aircraft animation container */
+  .aircraft-container {
+    @apply fixed pointer-events-none z-10;
+    filter: drop-shadow(0 10px 30px hsl(0 0% 0% / 0.5));
+  }
+
+  /* Gradient overlays */
+  .gradient-overlay {
+    background: linear-gradient(to bottom, transparent 0%, hsl(220 30% 8%) 100%);
+  }
+}
+
+@layer utilities {
+  /* Custom animations */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px hsl(38 90% 55% / 0.3); }
+    50% { box-shadow: 0 0 40px hsl(38 90% 55% / 0.5); }
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.6s ease-out forwards;
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
