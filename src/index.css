@@ -209,3 +209,9 @@
     }
   }
 }
+@layer utilities {
+  .border-border {
+    border-width: 1px;
+    border-color: hsl(var(--border));
+  }
+}
